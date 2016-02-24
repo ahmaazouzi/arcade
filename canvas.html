@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<body>
+	<canvas id='c' width='505' height='606'></canvas>
+	<script>
+var canvas = document.querySelector('#c');
+var context = canvas.getContext( '2d' );
+var x = 0; 
+var y = 30;
+var m = 10; 
+var l = 120;
+var v = 10; 
+var w = 220;
+
+function animate() {
+    requestAnimationFrame( animate );
+    draw(); 
+};
+
+
+
+function bckg(){
+    var batat = new Image();
+    batat.src = 'bckg.png'
+    context.drawImage(batat,0,0, c.width, c.height);
+};
+function lala(){
+    var image = new Image();
+    image.src = "enemy-bug.png"
+    context.drawImage(image, x, y, 83, 170);
+    x +=6
+    if (Math.abs(x) >= 525){
+    x = -20;
+};
+};
+
+function wawa(){
+    var lana = new Image();
+    lana.src = "enemy-bug.png"
+    context.drawImage(lana, m, l, 83, 170);
+    m +=10
+    if (Math.abs(m) >= 525){
+    m = -20;
+};
+};
+
+function baba(){
+    var zaza = new Image();
+    zaza.src = "enemy-bug.png"
+    context.drawImage(zaza, v, w, 83, 170);
+    v +=11
+    if (Math.abs(v) >= 525){
+    v = -20;
+};
+};
+
+function draw() {
+    bckg();
+    lala();
+    wawa();
+    baba();
+};
+
+animate();
+	</script>
+</body>
+</html>
