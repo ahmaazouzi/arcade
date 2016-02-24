@@ -9,23 +9,6 @@
 var canvas = document.querySelector('#c');
 var context = canvas.getContext( '2d' );
 
-var g = 210;
-var j = 420;
-
-var k = new Kibo();
-k.down(['up'], function() {
-    j -= 100;
-});
-k.down(['down'], function() {
-    j += 100;
-});
-k.down(['right'], function() {
-    g += 100;
-});
-k.down(['left'], function() {
-    g -= 100;
-});
-
 function animate() {
     requestAnimationFrame( animate );
     draw(); 
@@ -53,6 +36,20 @@ Enemy.prototype.move = function(){
     };
 };
 
+var arraya = []; 
+Enemy.prototype.ajouter = function(){
+    arraya.push(this);
+};
+
+
+var g = 210;
+var j = 420;
+
+var k = new Kibo();
+k.down(['up'], function() {j -= 100;});
+k.down(['down'],function() { j += 100;});
+k.down(['right'], function(){g += 100;});
+k.down(['left'], function() {g -= 100;});
 
 function mama(){
     var vava = new Image();
@@ -67,18 +64,22 @@ function mama(){
             g = 210;
             j = 420;
         };
-
     };
 };
+
+
 var amy = Enemy(0,30,15);
 var nana = Enemy(0,120,10)
 var lala = Enemy(0,220,7)
-var  arraya = [amy, nana, lala]
+
 function draw() {
     bckg();
     amy.move();
+    amy.ajouter()
     nana.move();
+    nana.ajouter();
     lala.move();
+    lala.ajouter();
     mama();
 };
 animate();
