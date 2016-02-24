@@ -1,18 +1,39 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<script type="text/javascript" src="kibo.min.js"></script>
 </head>
 <body>
 	<canvas id='c' width='505' height='606'></canvas>
 	<script>
 var canvas = document.querySelector('#c');
 var context = canvas.getContext( '2d' );
+
+var k = new Kibo();
+k.down(['up'], function() {
+    j -= 100;
+});
+k.down(['down'], function() {
+    j += 100;
+});
+k.down(['right'], function() {
+    g += 100;
+});
+k.down(['left'], function() {
+    g -= 100;
+});
+
 var x = 0; 
 var y = 30;
+
 var m = 10; 
 var l = 120;
+
 var v = 10; 
 var w = 220;
+
+var g = 210;
+var j = 420;
 
 function animate() {
     requestAnimationFrame( animate );
@@ -30,7 +51,7 @@ function lala(){
     var image = new Image();
     image.src = "enemy-bug.png"
     context.drawImage(image, x, y, 83, 170);
-    x +=6
+    x += 15;
     if (Math.abs(x) >= 525){
     x = -20;
 };
@@ -40,7 +61,7 @@ function wawa(){
     var lana = new Image();
     lana.src = "enemy-bug.png"
     context.drawImage(lana, m, l, 83, 170);
-    m +=10
+    m += 10;
     if (Math.abs(m) >= 525){
     m = -20;
 };
@@ -50,17 +71,33 @@ function baba(){
     var zaza = new Image();
     zaza.src = "enemy-bug.png"
     context.drawImage(zaza, v, w, 83, 170);
-    v +=11
+    v += 8;
     if (Math.abs(v) >= 525){
     v = -20;
 };
 };
+
+
+function mama(){
+    var vava = new Image();
+    vava.src = "char-boy.png"
+    context.drawImage(vava, g, j, 83,170);
+    if (g < x + 50 &&
+    g+ 50 > x &&
+    j < y + 50 &&
+    50 + j > y){
+        g = 210;
+        j = 420;
+    };
+};
+
 
 function draw() {
     bckg();
     lala();
     wawa();
     baba();
+    mama()
 };
 
 animate();
