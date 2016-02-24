@@ -4,10 +4,13 @@
 <script type="text/javascript" src="kibo.min.js"></script>
 </head>
 <body>
-	<canvas id='c' width='505' height='606'></canvas>
-	<script>
+    <canvas id='c' width='505' height='606'></canvas>
+    <script>
 var canvas = document.querySelector('#c');
 var context = canvas.getContext( '2d' );
+
+var g = 210;
+var j = 420;
 
 var k = new Kibo();
 k.down(['up'], function() {
@@ -23,58 +26,31 @@ k.down(['left'], function() {
     g -= 100;
 });
 
-var x = 0; 
-var y = 30;
-
-var m = 10; 
-var l = 120;
-
-var v = 10; 
-var w = 220;
-
-var g = 210;
-var j = 420;
-
 function animate() {
     requestAnimationFrame( animate );
     draw(); 
 };
-
-
-
 function bckg(){
     var batat = new Image();
     batat.src = 'bckg.png'
     context.drawImage(batat,0,0, c.width, c.height);
 };
-function lala(){
+var Enemy = function(x, y, speed){
+    var obj = Object.create(Enemy.prototype);
     var image = new Image();
-    image.src = "enemy-bug.png"
-    context.drawImage(image, x, y, 83, 170);
-    x += 15;
-    if (Math.abs(x) >= 525){
-    x = -20;
+    obj.image = image;
+    obj.x = x;
+    obj.y = y;
+    obj.speed = speed;
+    return obj;
 };
-};
-
-function wawa(){
-    var lana = new Image();
-    lana.src = "enemy-bug.png"
-    context.drawImage(lana, m, l, 83, 170);
-    m += 10;
-    if (Math.abs(m) >= 525){
-    m = -20;
-};
-};
-
-function baba(){
-    var zaza = new Image();
-    zaza.src = "enemy-bug.png"
-    context.drawImage(zaza, v, w, 83, 170);
-    v += 8;
-    if (Math.abs(v) >= 525){
-    v = -20;
-};
+Enemy.prototype.move = function(){
+    this.image.src = "enemy-bug.png";
+    context.drawImage(this.image, this.x, this.y, 83, 170);
+    this.x += this.speed;
+    if (Math.abs(this.x) >= 525){
+        this.x = -20;
+    };
 };
 
 
@@ -82,25 +58,30 @@ function mama(){
     var vava = new Image();
     vava.src = "char-boy.png"
     context.drawImage(vava, g, j, 83,170);
-    if (g < x + 50 &&
-    g+ 50 > x &&
-    j < y + 50 &&
-    50 + j > y){
-        g = 210;
-        j = 420;
+    for (wawa in arraya){
+        var gaga = arraya[wawa];
+        if (g < gaga.x + 50 &&
+        g+ 50 > gaga.x &&
+        j < gaga.y + 50 &&
+        50 + j > gaga.y){
+            g = 210;
+            j = 420;
+        };
+
     };
 };
-
-
+var amy = Enemy(0,30,15);
+var nana = Enemy(0,120,10)
+var lala = Enemy(0,220,7)
+var  arraya = [amy, nana, lala]
 function draw() {
     bckg();
-    lala();
-    wawa();
-    baba();
-    mama()
+    amy.move();
+    nana.move();
+    lala.move();
+    mama();
 };
-
 animate();
-	</script>
+    </script>
 </body>
 </html>
