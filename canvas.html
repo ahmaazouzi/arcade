@@ -13,11 +13,13 @@ function animate() {
     requestAnimationFrame( animate );
     draw(); 
 };
+
 function bckg(){
     var batat = new Image();
     batat.src = 'bckg.png'
     context.drawImage(batat,0,0, c.width, c.height);
 };
+
 var Enemy = function(x, y, speed){
     var obj = Object.create(Enemy.prototype);
     var image = new Image();
@@ -27,6 +29,7 @@ var Enemy = function(x, y, speed){
     obj.speed = speed;
     return obj;
 };
+
 Enemy.prototype.move = function(){
     this.image.src = "enemy-bug.png";
     context.drawImage(this.image, this.x, this.y, 83, 170);
@@ -42,36 +45,49 @@ Enemy.prototype.ajouter = function(){
 };
 
 
-var g = 210;
-var j = 420;
-
-var k = new Kibo();
-k.down(['up'], function() {j -= 100;});
-k.down(['down'],function() { j += 100;});
-k.down(['right'], function(){g += 100;});
-k.down(['left'], function() {g -= 100;});
-
-function mama(){
-    var vava = new Image();
-    vava.src = "char-boy.png"
-    context.drawImage(vava, g, j, 83,170);
-    for (wawa in arraya){
-        var gaga = arraya[wawa];
-        if (g < gaga.x + 50 &&
-        g+ 50 > gaga.x &&
-        j < gaga.y + 50 &&
-        50 + j > gaga.y){
-            g = 210;
-            j = 420;
-        };
-    };
+var Player = function(){
+    var obj = Object.create(Player.prototype);
+    var g = 210;
+    var j = 420;
+    obj.g = g;
+    obj.j = j;
+    var k = new Kibo();
+    k.down(['up'], function() {obj.j -= 100;});
+    k.down(['down'], function() {obj.j += 100;});
+    k.down(['right'], function() {obj.g += 100;});
+    k.down(['left'], function() {obj.g -= 100;});
+    return obj;
 };
 
+Player.prototype.movado = function(){
+    var vava = new Image();
+    vava.src = "char-boy.png";
+    this.vava = vava;
+    context.drawImage(this.vava, this.g, this.j, 83,170);
+    for (wawa in arraya){
+        var gaga = arraya[wawa];
+        if (this.g < gaga.x + 50 &&
+        this.g+ 50 > gaga.x &&
+        this.j < gaga.y + 50 &&
+        50 + this.j > gaga.y){
+            this.g = 210;
+            this.j = 420;
+        };
+        if (this.g < 0){this.g = 0;};
+        if (this.g > 505){this.g = 433};
+        if (this.j > 430){this.j = 430}
+        if (this.j < - 5){
+            this.j = 420;
+            this.j = 210;
+        };
+
+    };
+};
 
 var amy = Enemy(0,30,15);
 var nana = Enemy(0,120,10)
 var lala = Enemy(0,220,7)
-
+var sasa = Player();
 function draw() {
     bckg();
     amy.move();
@@ -80,8 +96,9 @@ function draw() {
     nana.ajouter();
     lala.move();
     lala.ajouter();
-    mama();
+    sasa.movado();
 };
+
 animate();
     </script>
 </body>
