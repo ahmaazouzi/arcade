@@ -8,6 +8,7 @@
     <script>
 var canvas = document.querySelector('#c');
 var context = canvas.getContext( '2d' );
+var arraya = [];
 
 function animate() {
     requestAnimationFrame( animate );
@@ -38,8 +39,7 @@ Enemy.prototype.move = function(){
         this.x = -20;
     };
 };
-
-var arraya = []; 
+ 
 Enemy.prototype.ajouter = function(){
     arraya.push(this);
 };
